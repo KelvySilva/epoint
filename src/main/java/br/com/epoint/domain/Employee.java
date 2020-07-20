@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,16 @@ public class Employee extends AbstractEntity {
     @NotEmpty
     private String name;
 
+    @NotEmpty
+    @NotNull
+    private String username;
+
+    private String password;
+
+    @NotEmpty
+    @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
+    private boolean admin;
+
     @NotNull
     @NotEmpty
     @Column(unique = true)
@@ -32,6 +43,8 @@ public class Employee extends AbstractEntity {
     @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
     private boolean isBlocked;
 
+    @NotNull
+    @NotEmpty
     @Column(columnDefinition="BOOLEAN DEFAULT TRUE")
     private boolean isActive;
 

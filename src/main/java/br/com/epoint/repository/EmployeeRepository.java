@@ -9,4 +9,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Employee findByCode(Long code);
 
     List<Employee> findByIsBlockedIsTrue();
+
+    Employee findByUsername(String username);
 }

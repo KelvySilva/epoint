@@ -2,9 +2,8 @@ package br.com.epoint.resource;
 
 import br.com.epoint.domain.Employee;
 import br.com.epoint.error.ErrorDetails;
-import br.com.epoint.error.ResourceNotFoundException;
-import br.com.epoint.error.ValidationErrorDetails;
 import br.com.epoint.service.EmployeeService;
+import br.com.epoint.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +27,7 @@ public class EmployeeAPI {
         this.service = service;
     }
 
-    @GetMapping
+    @GetMapping(path = "/protected")
     public ResponseEntity listAll() {
         List<Employee> employees = this.service.listAll();
         if (employees.isEmpty())
@@ -46,35 +43,36 @@ public class EmployeeAPI {
         return ResponseEntity.ok(employees);
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "protected/{id}")
     public ResponseEntity listOne(@PathVariable Long id) {
         return ResponseEntity.ok(this.service.listOne(id));
     }
 
-    @PostMapping
+    @PostMapping(path = "/admin")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity saveOne(@Valid @RequestBody Employee employee) {
+        String pass = PasswordEncoder.encode(employee.getPassword());
+        employee.setPassword(pass);
         return ResponseEntity.ok(this.service.saveOne(employee));
     }
 
-    @GetMapping(path = "/blockeds")
+    @GetMapping(path = "protected/blockeds")
     public ResponseEntity listBlockeds(){
         return ResponseEntity.ok(this.service.listBlockedEmployees());
     }
 
-    @PutMapping(path = "/{id}")
+    @PutMapping(path = "admin/{id}")
     @Transactional
-    @PreAuthorize("")
-    public ResponseEntity updateOne(@PathVariable Long id, @RequestBody Employee employee) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity updateOne(@PathVariable Long id,@Valid @RequestBody Employee employee) {
         Optional<Employee> employee1 = this.service.listOne(id);
         if (employee1.isPresent()) {
-            employee.setId(id);
-            System.out.println(employee);
             return ResponseEntity.ok(this.service.updateOne(employee));
         }
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(path = "/code/{code}")
+    @GetMapping(path = "protected/code/{code}")
     public ResponseEntity listByCode(@PathVariable Long code) {
         Employee employee = new Employee();
         return ResponseEntity.ok(this.service.getByCode(code));

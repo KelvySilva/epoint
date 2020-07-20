@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
@@ -33,4 +35,20 @@ public class Point extends AbstractEntity {
     })
     private Employee employee;
 
+    @NotNull
+    @NotEmpty
+    @Enumerated(EnumType.STRING)
+    private POINT_TYPE type;
+
+
+    public enum POINT_TYPE {
+        ENTRADA("Entrada"),
+        SAIDA("Saída");
+
+        private String description;
+
+        POINT_TYPE(String description){
+            this.description = description;
+        }
+    }
 }

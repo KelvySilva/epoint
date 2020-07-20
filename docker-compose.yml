@@ -4,7 +4,7 @@ services:
     image: postgres:11
     container_name: epoint-bd
     ports:
-      - 7778:5432
+      - 7779:5432
     environment:
       POSTGRES_DB: epoint
       POSTGRES_USER: epoint
