@@ -1,33 +1,13 @@
 {
 	"info": {
-		"_postman_id": "f11ff181-8230-4540-9a01-6f69065c56b6",
-		"name": "Epoint",
+		"_postman_id": "b7f04240-129e-4f49-b9df-40a07d0d40d3",
+		"name": "SG",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Employee",
+			"name": "Cliente",
 			"item": [
-				{
-					"name": "Get One",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8082/employee/3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8082",
-							"path": [
-								"employee",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Save One",
 					"request": {
@@ -35,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Ricardo Martins\",\r\n    \"cpf\":\"459.968.578-80\",\r\n    \"type\":\"SUPA\"\r\n}",
+							"raw": "{\n    \"nome\":\"João Albuquerque Alves\",\n    \"cep\":\"87083015\",\n    \"telefones\": [\n        {\n            \"numero\":\"2523452345\",\n            \"numeroPricipal\": false\n        },\n        {\n            \"numero\":\"253452345234\",\n            \"numeroPricipal\": true\n        }\n    ],\n    \"loja\":{\n        \"id\":22\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,14 +23,34 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/employee",
+							"raw": "http://localhost:8080/cliente",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8080",
 							"path": [
-								"employee"
+								"cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/cliente/35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cliente",
+								"35"
 							]
 						}
 					},
@@ -62,69 +62,27 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/employee",
+							"raw": "http://localhost:8080/cliente",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8080",
 							"path": [
-								"employee"
-							]
-						},
-						"description": "    "
-					},
-					"response": []
-				},
-				{
-					"name": "List Blockeds",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8082/employee/blockeds",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8082",
-							"path": [
-								"employee",
-								"blockeds"
+								"cliente"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Find By code",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8082/employee/code/5678",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8082",
-							"path": [
-								"employee",
-								"code",
-								"5678"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateOne",
+					"name": "Update",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": null,\r\n    \"cpf\": null,\r\n    \"code\": 7657,\r\n    \"blockCauseMessage\": null,\r\n    \"type\": null,\r\n    \"active\": false,\r\n    \"blocked\": false\r\n}",
+							"raw": "{\n        \"id\": 5,\n        \"nome\": \"Zé de Almeida\",\n        \"cep\": \"87083130\",\n        \"telefones\": [\n            {\n                \"id\": 6,\n                \"numero\": \"4165458478\",\n                \"numeroPricipal\": false\n            },\n            {\n                \"id\": 7,\n                \"numero\": \"565465455\",\n                \"numeroPricipal\": true\n            }\n        ],\n        \"loja\": \"loja nova\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,15 +90,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/employee/36",
+							"raw": "http://localhost:8080/cliente/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8080",
 							"path": [
-								"employee",
-								"36"
+								"cliente",
+								"5"
 							]
 						}
 					},
@@ -150,7 +108,114 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Point",
+			"name": "Animal",
+			"item": [
+				{
+					"name": "List All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/animal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Cavalo\",\n    \"comidaFavorita\":\"Cenoura\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/animal",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/animal/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"animal",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "POST Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"numeroPedido\":564654564,\n    \"items\": [\n        {\n            \"nomeItem\":\"Nescau\",\n            \"valorItem\":6.68,\n            \"quantidade\": 2\n        },\n         {\n            \"nomeItem\":\"Banana\",\n            \"valorItem\":1.68,\n            \"quantidade\": 1\n        }\n\n    ],\n    \"cliente\" : {\n        \"nome\":\"Jose da Silva\",\n        \"cep\": \"8708328-0\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Loja",
 			"item": [
 				{
 					"name": "Save One",
@@ -159,7 +224,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": {\r\n        \"code\":5678\r\n    }\r\n}",
+							"raw": "{\n    \"nome\":\"Nova Loja 01\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -167,14 +232,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/point",
+							"raw": "http://localhost:8080/loja",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8080",
 							"path": [
-								"point"
+								"loja"
 							]
 						}
 					},
@@ -186,14 +251,34 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/point",
+							"raw": "http://localhost:8080/loja",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8082",
+							"port": "8080",
 							"path": [
-								"point"
+								"loja"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/loja/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"loja",
+								"22"
 							]
 						}
 					},
