@@ -69,13 +69,10 @@ public class EmployeeAPI {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity updateOne(
             @PathVariable Long id,
-            @Valid @RequestBody Employee employee,
-            Errors errors
+            @Valid @RequestBody Employee employee
     ) {
-        System.out.println(employee);
-        if (errors.hasErrors()) {
-            throw new ActionNotPermittedException("Todos os campos devem ser enviados");
-        }
+
+
         Optional<Employee> employee1 = this.service.listOne(id);
         if (employee1.isPresent()) {
             Employee update = employee1.get();

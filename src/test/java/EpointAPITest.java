@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = EpointApplicationStart.class,webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc()
-//@TestPropertySource(locations="classpath:apllication-test.yml")
+@TestPropertySource(locations="classpath:apllication-test.yml")
 public class EpointAPITest {
 
     @Autowired
