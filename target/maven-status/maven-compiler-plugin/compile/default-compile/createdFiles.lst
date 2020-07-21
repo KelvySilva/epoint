@@ -21,6 +21,7 @@ br/com/epoint/handler/RestExceptionHandler.class
 br/com/epoint/util/PasswordEncoder.class
 br/com/epoint/service/CustomUserDetailService.class
 br/com/epoint/domain/Point.class
+br/com/epoint/domain/Point$PointBuilder.class
 br/com/epoint/domain/PageableResponse.class
 br/com/epoint/domain/Point$POINT_TYPE.class
 br/com/epoint/error/ValidationErrorDetails$Builder.class

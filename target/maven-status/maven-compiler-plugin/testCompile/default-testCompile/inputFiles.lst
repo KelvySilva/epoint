@@ -1,2 +1,3 @@
 /home/sgcloud/www/epoint/src/test/java/EpointApplicationStartTest.java
 /home/sgcloud/www/epoint/src/test/java/EpointAPITest.java
+/home/sgcloud/www/epoint/src/test/java/RequestResponseLoggingInterceptor.java

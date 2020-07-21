@@ -11,11 +11,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.ServerRequest;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Method;
 import java.time.Instant;
 import java.util.*;
 
@@ -76,6 +78,7 @@ public class EmployeeAPI {
         Optional<Employee> employee1 = this.service.listOne(id);
         if (employee1.isPresent()) {
             Employee update = employee1.get();
+
             if (Objects.nonNull(employee.getType())) {
                 update.setType(employee.getType());
             }
