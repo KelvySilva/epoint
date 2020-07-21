@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:7778/epoint?user=epoint&password=epoint123&useSSl=false
+    url: jdbc:postgresql://127.0.0.1:7779/epoint?user=epoint&password=epoint123&useSSl=false
     username: epoint
     password: epoint123
   jpa:

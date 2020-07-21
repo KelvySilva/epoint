@@ -16,8 +16,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.OptionalLong;
 
 @Service
 public class PointService {
@@ -39,14 +37,14 @@ public class PointService {
         if (Objects.isNull(employee)) {
             throw new ResourceNotFoundException("O funcionário informado não existe");
         }
-        if (employee.isBlocked()) {
+        if (employee.getIsBlocked()) {
             throw new ActionNotPermittedException("O funcionário informado está com bloqueio. Entre em contato com o RH");
         }
 
         if(this.repository.countByEmployeeIdAndPointDateEquals(employee.getId(), LocalDate.now()) < 1){
             point.setType(Point.POINT_TYPE.ENTRADA);
             if (this.isLate(point)) {
-                point.setLate(true);
+                point.setIsLate(true);
             }
         }else if (this.repository.countByEmployeeIdAndPointDateEquals(employee.getId(), LocalDate.now()) == 1) {
             point.setType(Point.POINT_TYPE.SAIDA);
@@ -58,7 +56,7 @@ public class PointService {
                 LocalDate.now().minusDays(LocalDate.now().getDayOfWeek().getValue() + (-1)),
                 LocalDate.now()) > 4
         ) {
-            employee.setBlocked(true);
+            employee.setIsBlocked(true);
             employee.setBlockCauseMessage("Mais de 5 atrasos no ponto");
         }
 

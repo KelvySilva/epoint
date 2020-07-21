@@ -25,7 +25,7 @@ public class Point extends AbstractEntity {
     private LocalTime pointTime = LocalTime.now();
 
     @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
-    private boolean isLate;
+    private Boolean isLate;
 
 
     @ManyToOne

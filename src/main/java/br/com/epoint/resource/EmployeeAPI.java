@@ -1,12 +1,15 @@
 package br.com.epoint.resource;
 
 import br.com.epoint.domain.Employee;
+import br.com.epoint.error.ActionNotPermittedException;
 import br.com.epoint.error.ErrorDetails;
 import br.com.epoint.service.EmployeeService;
 import br.com.epoint.util.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -64,8 +67,15 @@ public class EmployeeAPI {
     @PutMapping(path = "admin/{id}")
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity updateOne(@PathVariable Long id,@Valid @RequestBody(required = true) Employee employee) {
+    public ResponseEntity updateOne(
+            @PathVariable Long id,
+            @Valid @RequestBody Employee employee,
+            Errors errors
+    ) {
         System.out.println(employee);
+        if (errors.hasErrors()) {
+            throw new ActionNotPermittedException("Todos os campos devem ser enviados");
+        }
         Optional<Employee> employee1 = this.service.listOne(id);
         if (employee1.isPresent()) {
             Employee update = employee1.get();
@@ -87,14 +97,14 @@ public class EmployeeAPI {
             if (Objects.nonNull(employee.getBlockCauseMessage())) {
                 update.setBlockCauseMessage(employee.getBlockCauseMessage());
             }
-            if (!(employee.isBlocked() && update.isBlocked())) {
-                update.setBlocked(employee.isBlocked());
+            if (Objects.nonNull(employee.getIsBlocked()) && !(employee.getIsBlocked() && update.getIsBlocked())) {
+                update.setIsBlocked(employee.getIsBlocked());
             }
-            if (!(employee.isAdmin() && update.isAdmin())) {
-                update.setAdmin(employee.isAdmin());
+            if (Objects.nonNull(employee.getAdmin()) && !(employee.getAdmin() && update.getAdmin())) {
+                update.setAdmin(employee.getAdmin());
             }
-            if (!(employee.isActive() && update.isActive())) {
-                update.setActive(employee.isActive());
+            if (Objects.nonNull(employee.getIsActive()) &&  !(employee.getIsActive() && update.getIsActive())) {
+                update.setIsActive(employee.getIsActive());
             }
             return ResponseEntity.ok(this.service.updateOne(update));
         }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f11ff181-8230-4540-9a01-6f69065c56b6",
+		"_postman_id": "ff993677-2e9d-4162-8bb3-69a7a2a909fe",
 		"name": "Epoint",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,10 +11,25 @@
 				{
 					"name": "Get One",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/employee/3",
+							"raw": "http://localhost:8082/employee/protected",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -22,7 +37,7 @@
 							"port": "8082",
 							"path": [
 								"employee",
-								"3"
+								"protected"
 							]
 						}
 					},
@@ -31,11 +46,26 @@
 				{
 					"name": "Save One",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "rhumanos",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "aj[lo12po",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Ricardo Martins\",\r\n    \"cpf\":\"459.968.578-80\",\r\n    \"type\":\"SUPA\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Juarez Ramalho\",\r\n    \"username\": \"rhumanos2\",\r\n    \"password\": \"senha123\",\r\n    \"admin\": false,\r\n    \"cpf\": \"459.868.778-58\",\r\n    \"blockCauseMessage\": \"\",\r\n    \"type\": \"RH\",\r\n    \"blocked\": false,\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,14 +73,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/employee",
+							"raw": "http://localhost:8082/employee/admin",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"employee"
+								"employee",
+								"admin"
 							]
 						}
 					},
@@ -59,17 +90,33 @@
 				{
 					"name": "List All",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/employee",
+							"raw": "http://localhost:8082/employee/protected",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"employee"
+								"employee",
+								"protected"
 							]
 						},
 						"description": "    "
@@ -79,10 +126,25 @@
 				{
 					"name": "List Blockeds",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/employee/blockeds",
+							"raw": "http://localhost:8082/employee/protected/blockeds",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -90,6 +152,7 @@
 							"port": "8082",
 							"path": [
 								"employee",
+								"protected",
 								"blockeds"
 							]
 						}
@@ -99,10 +162,25 @@
 				{
 					"name": "Find By code",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/employee/code/5678",
+							"raw": "http://localhost:8082/employee/protected/code/2440",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -110,8 +188,9 @@
 							"port": "8082",
 							"path": [
 								"employee",
+								"protected",
 								"code",
-								"5678"
+								"2440"
 							]
 						}
 					},
@@ -120,11 +199,26 @@
 				{
 					"name": "UpdateOne",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": null,\r\n    \"cpf\": null,\r\n    \"code\": 7657,\r\n    \"blockCauseMessage\": null,\r\n    \"type\": null,\r\n    \"active\": false,\r\n    \"blocked\": false\r\n}",
+							"raw": "{\r\n    \"id\": 7,\r\n    \"name\": \"Arnaldo Garcia\",\r\n    \"admin\": true,\r\n    \"cpf\": \"459.868.778-50\",\r\n    \"code\": 5064,\r\n    \"blockCauseMessage\": \"\",\r\n    \"type\": \"RH\",\r\n    \"blocked\": false,\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -132,7 +226,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8082/employee/36",
+							"raw": "http://localhost:8082/employee/admin/7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -140,7 +234,8 @@
 							"port": "8082",
 							"path": [
 								"employee",
-								"36"
+								"admin",
+								"7"
 							]
 						}
 					},
@@ -159,7 +254,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"employee\": {\r\n        \"code\":5678\r\n    }\r\n}",
+							"raw": "{\r\n    \"employee\": {\r\n        \"code\":2928\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,17 +278,109 @@
 				{
 					"name": "List All",
 					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/point",
+							"raw": "http://localhost:8082/point/protected",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8082",
 							"path": [
-								"point"
+								"point",
+								"protected"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/point/list?page=1&employee_name=And",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"point",
+								"list"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "employee_name",
+									"value": "And"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Date",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "senha123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "rhumanos2",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/point/protected/dateAndId?id=2&date=2020-07-20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"point",
+								"protected",
+								"dateAndId"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								},
+								{
+									"key": "date",
+									"value": "2020-07-20"
+								}
 							]
 						}
 					},

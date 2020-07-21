@@ -4,6 +4,7 @@ import br.com.epoint.error.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -56,8 +57,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         ValidationErrorDetails details = ValidationErrorDetails.Builder.newBuilder()
                 .timestamp(new Date().getTime())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .title("Field validation error")
-                .detail("Field validation error")
+                .title("Erro de validação de campo")
+                .detail("Erro de validação de campo")
                 .developerMessage(exception.getClass().getName())
                 .field(fields)
                 .fieldMessage(messages)

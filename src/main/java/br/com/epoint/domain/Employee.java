@@ -1,6 +1,7 @@
 package br.com.epoint.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -22,20 +24,25 @@ public class Employee extends AbstractEntity {
 
     @NotNull
     @NotEmpty
+    @NotBlank
+    @JsonProperty(required = true)
     private String name;
 
     @NotEmpty
     @NotNull
+    @NotBlank
     private String username;
 
     private String password;
 
     @NotEmpty(message = "É preciso informar o campo admin")
+    @NotBlank
     @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
-    private boolean admin;
+    private Boolean admin;
 
     @NotNull
     @NotEmpty
+    @NotBlank
     @Column(unique = true)
     private String cpf;
 
@@ -43,17 +50,20 @@ public class Employee extends AbstractEntity {
     private Long code;
 
     @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
-    private boolean isBlocked;
+    @NotBlank
+    private Boolean isBlocked;
 
     @NotNull
     @NotEmpty
+    @NotBlank
     @Column(columnDefinition="BOOLEAN DEFAULT TRUE")
-    private boolean isActive;
+    private Boolean isActive;
 
     private String blockCauseMessage;
 
     @NotNull
     @NotEmpty
+    @NotBlank
     @Enumerated(EnumType.STRING)
     private TYPE type;
 
@@ -66,17 +76,17 @@ public class Employee extends AbstractEntity {
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", admin=" + admin +
-                ", cpf='" + cpf + '\'' +
-                ", code=" + code +
-                ", isBlocked=" + isBlocked +
-                ", isActive=" + isActive +
-                ", blockCauseMessage='" + blockCauseMessage + '\'' +
-                ", type=" + type +
-                '}';
+                "\nname='" + name + '\'' +
+                ", \nusername='" + username + '\'' +
+                ", \npassword='" + password + '\'' +
+                ", \nadmin=" + admin +
+                ", \ncpf='" + cpf + '\'' +
+                ", \ncode=" + code +
+                ", \nisBlocked=" + isBlocked +
+                ", \nisActive=" + isActive +
+                ", \nblockCauseMessage='" + blockCauseMessage + '\'' +
+                ", \ntype=" + type +
+                "\n"+'}';
     }
 
     public enum TYPE {

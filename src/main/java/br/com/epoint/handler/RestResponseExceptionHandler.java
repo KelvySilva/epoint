@@ -19,8 +19,8 @@ public class RestResponseExceptionHandler extends DefaultResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse response) throws IOException {
-        System.out.println("Doing something with this status code: "+ response.getRawStatusCode());
-        System.out.println("Doing something with this body: "+ IOUtils.toString(response.getBody(), "UTF-8"));
+        System.out.println("Status code: "+ response.getRawStatusCode());
+        System.out.println("Body: "+ IOUtils.toString(response.getBody(), "UTF-8"));
     }
 }
 

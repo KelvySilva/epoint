@@ -61,10 +61,10 @@ public class EpointAPITest {
         Point point = new Point();
         Employee employee = new Employee();
         employee.setType(Employee.TYPE.DEV);
-        employee.setActive(true);
+        employee.setIsActive(true);
         employee.setAdmin(false);
         employee.setCode(6564L);
-        employee.setBlocked(false);
+        employee.setIsBlocked(false);
 
         point.setType(Point.POINT_TYPE.ENTRADA);
         point.setEmployee(employee);
