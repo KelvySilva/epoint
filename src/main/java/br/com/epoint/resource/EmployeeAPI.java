@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("employee")
@@ -64,10 +64,39 @@ public class EmployeeAPI {
     @PutMapping(path = "admin/{id}")
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity updateOne(@PathVariable Long id,@Valid @RequestBody Employee employee) {
+    public ResponseEntity updateOne(@PathVariable Long id,@Valid @RequestBody(required = true) Employee employee) {
+        System.out.println(employee);
         Optional<Employee> employee1 = this.service.listOne(id);
         if (employee1.isPresent()) {
-            return ResponseEntity.ok(this.service.updateOne(employee));
+            Employee update = employee1.get();
+            if (Objects.nonNull(employee.getType())) {
+                update.setType(employee.getType());
+            }
+            if (Objects.nonNull(employee.getName())) {
+                update.setName(employee.getName());
+            }
+            if (Objects.nonNull(employee.getCpf())) {
+                update.setCpf(employee.getCpf());
+            }
+            if (Objects.nonNull(employee.getUsername())) {
+                update.setUsername(employee.getUsername());
+            }
+            if ((Objects.nonNull(employee.getPassword())) && !(update.getPassword().equals(employee.getPassword()))) {
+                update.setPassword(PasswordEncoder.encode(employee.getUsername()));
+            }
+            if (Objects.nonNull(employee.getBlockCauseMessage())) {
+                update.setBlockCauseMessage(employee.getBlockCauseMessage());
+            }
+            if (!(employee.isBlocked() && update.isBlocked())) {
+                update.setBlocked(employee.isBlocked());
+            }
+            if (!(employee.isAdmin() && update.isAdmin())) {
+                update.setAdmin(employee.isAdmin());
+            }
+            if (!(employee.isActive() && update.isActive())) {
+                update.setActive(employee.isActive());
+            }
+            return ResponseEntity.ok(this.service.updateOne(update));
         }
         return ResponseEntity.notFound().build();
     }

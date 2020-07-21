@@ -1,5 +1,7 @@
 package br.com.epoint.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +10,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
 
 @Getter
 @Setter
@@ -28,7 +30,7 @@ public class Employee extends AbstractEntity {
 
     private String password;
 
-    @NotEmpty
+    @NotEmpty(message = "É preciso informar o campo admin")
     @Column(columnDefinition="BOOLEAN DEFAULT FALSE")
     private boolean admin;
 
@@ -59,6 +61,22 @@ public class Employee extends AbstractEntity {
         long leftLimit = 1000L;
         long rightLimit = 8999L;
         this.code = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", admin=" + admin +
+                ", cpf='" + cpf + '\'' +
+                ", code=" + code +
+                ", isBlocked=" + isBlocked +
+                ", isActive=" + isActive +
+                ", blockCauseMessage='" + blockCauseMessage + '\'' +
+                ", type=" + type +
+                '}';
     }
 
     public enum TYPE {
