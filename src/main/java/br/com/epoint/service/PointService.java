@@ -35,7 +35,7 @@ public class PointService {
         Employee employee = this.employeeRepository.findByCode(code);
 
         if (Objects.isNull(employee)) {
-            throw new ResourceNotFoundException("O funcionário informado não existe");
+            throw new ResourceNotFoundException(String.format("O funcionário codigo %s informado não existe", code));
         }
         if (employee.getIsBlocked()) {
             throw new ActionNotPermittedException("O funcionário informado está com bloqueio. Entre em contato com o RH");

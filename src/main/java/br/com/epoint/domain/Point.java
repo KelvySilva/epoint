@@ -40,6 +40,22 @@ public class Point extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private POINT_TYPE type;
 
+    @Override
+    public String toString() {
+        return "Point{\n" +
+                "\npointDate=" + pointDate +
+                ", \npointTime=" + pointTime +
+                ", \nisLate=" + isLate +
+                ", \nemployee=" + employee +
+                ", \ntype=" + type +
+                "\n"+
+                '}';
+    }
+
+
+
+
+
 
     public enum POINT_TYPE {
         ENTRADA("Entrada"),
@@ -49,6 +65,63 @@ public class Point extends AbstractEntity {
 
         POINT_TYPE(String description){
             this.description = description;
+        }
+    }
+
+    public static final class PointBuilder {
+        protected Long id;
+        private LocalDate pointDate = LocalDate.now();
+        private LocalTime pointTime = LocalTime.now();
+        private Boolean isLate;
+        private Employee employee;
+        private POINT_TYPE type;
+
+        private PointBuilder() {
+        }
+
+        public static PointBuilder aPoint() {
+            return new PointBuilder();
+        }
+
+        public PointBuilder withPointDate(LocalDate pointDate) {
+            this.pointDate = pointDate;
+            return this;
+        }
+
+        public PointBuilder withPointTime(LocalTime pointTime) {
+            this.pointTime = pointTime;
+            return this;
+        }
+
+        public PointBuilder withIsLate(Boolean isLate) {
+            this.isLate = isLate;
+            return this;
+        }
+
+        public PointBuilder withEmployee(Employee employee) {
+            this.employee = employee;
+            return this;
+        }
+
+        public PointBuilder withType(POINT_TYPE type) {
+            this.type = type;
+            return this;
+        }
+
+        public PointBuilder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Point build() {
+            Point point = new Point();
+            point.setPointDate(pointDate);
+            point.setPointTime(pointTime);
+            point.setIsLate(isLate);
+            point.setEmployee(employee);
+            point.setType(type);
+            point.setId(id);
+            return point;
         }
     }
 }

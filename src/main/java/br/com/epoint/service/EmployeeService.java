@@ -37,7 +37,7 @@ public class EmployeeService {
 
     public void employeeExists(Long id) {
         Optional<Employee> op = this.repository.findById(id);
-        if (!op.isPresent()) throw new ResourceNotFoundException(String.format("Student not found for id: %s", id));
+        if (!op.isPresent()) throw new ResourceNotFoundException(String.format("Empltee not found for id: %s", id));
     }
 
     public Employee getByCode(Long code) {
