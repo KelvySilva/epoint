@@ -29,6 +29,16 @@ public class PointService {
         this.employeeRepository = employeeRepository;
     }
 
+
+    /**
+     * Recebe um point com apenas o codigo do funcionario e faz as
+     * verificações necessárias pra salvar o registro de ponto e
+     * retorna o ponto caso tenha passado nas validações.
+     *
+     * @param point
+     * @author Kelvy Silva (kylmax@hotmail.com)
+     * @return
+     */
     @Transactional
     public Point saveOne(Point point) {
         Long code = point.getEmployee().getCode();
@@ -53,7 +63,10 @@ public class PointService {
         }
         if (this.repository.countByEmployeeIdAndIsLateIsTrueAndPointDateIsBetween(
                 employee.getId(),
-                LocalDate.now().minusDays(LocalDate.now().getDayOfWeek().getValue() + (-1)),
+                LocalDate.now()
+                        .minusDays(
+                                LocalDate.now().getDayOfWeek().getValue() + (-1)
+                        ),
                 LocalDate.now()) > 4
         ) {
             employee.setIsBlocked(true);
@@ -74,6 +87,14 @@ public class PointService {
         return this.repository.findAll(pageable);
     }
 
+
+    /**
+     * Recebe um point e verifica se está atrasado de acordo com o valor pre-definido
+     *
+     * @param point
+     * @author Kelvy Silva (kylmax@hotmail.com)
+     * @return
+     */
     public boolean isLate(Point point) {
         if (point.getPointTime().isAfter(DateAndTime.INITIAL_TIME.plusMinutes(5))) {
             return true;
@@ -85,6 +106,18 @@ public class PointService {
         return this.repository.findByPointDate(date);
     }
 
+    public Page<Point> findByEmployeeNameLike(String name, Pageable pageable) {
+        return this.repository.findByEmployeeNameIgnoreCaseContaining(name, pageable);
+    }
+
+    /**
+     * Recebe a tada e o id do funcionário e traz os registros de pontos.
+     *
+     * @param date
+     * @param id
+     * @author Kelvy Silva (kylmax@hotmail.com)
+     * @return
+     */
     public List<Point> findByDateAndEmployeeId(LocalDate date, Long id) {
         if (Objects.isNull(id) && !(Long.valueOf(id) instanceof Long)) {
             throw new ResourceNotFoundException("Valores não permitidos ou valor não encontrado");

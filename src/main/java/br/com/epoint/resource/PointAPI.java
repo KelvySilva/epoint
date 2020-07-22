@@ -1,14 +1,17 @@
 package br.com.epoint.resource;
 
+import br.com.epoint.domain.PageableResponse;
 import br.com.epoint.domain.Point;
 import br.com.epoint.service.PointService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "point")
@@ -50,6 +53,13 @@ public class PointAPI {
     ) {
         LocalDate data = LocalDate.parse(date);
         return ResponseEntity.ok(this.service.findByDateAndEmployeeId(data, id));
+    }
+
+    @GetMapping(path = "/protected/listByName")
+    public ResponseEntity listByName(@RequestParam("name") String name, Pageable pageable) {
+        System.out.println(name);
+        Page<Point> allByNameLike = this.service.findByEmployeeNameLike(name, pageable);
+        return ResponseEntity.ok(allByNameLike);
     }
 
 
